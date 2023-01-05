@@ -9,7 +9,7 @@
   border: none;
   box-sizing: border-box;
   object-fit: cover;
-  background-size: 100%; 
+  background-size: 100%;
 }
 
 .popup__button-close :hover {
