@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Место</title>
+</head>
+
+<body class="root">
+  <div class="page">
+    <header class="header">
+      <img src="./images/Vector.svg" alt="Логотип" class="header__logo">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img src="./images/Avatar.jpg" alt="Аватар профиля" class="profile__avatar">
+        <div class="profile__info">
+          <p class="profile__title">Жак-Ив Кусто </p>
+          <button class="profile__edit-button"></button>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button class="profile__add-button"></button>
+      </section>
+      <secttion class="cards">
+        <div class="card">
+          <img src="./images/Canada.jpg" alt="Пейзаж парка Гарибальди" class="card__photo">
+          <div class="card__panel">
+            <h2 class="card__title">парк Гарибальди</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="./images/Japan.jpg" alt="Вид на Токио с высоты птичьего полета" class="card__photo">
+          <div class="card__panel">
+            <h2 class="card__title">Токио</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="./images/Rome, Italy.jpg" alt="Рим" class="card__photo">
+          <div class="card__panel">
+            <h2 class="card__title">Рим</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="./images/Sochi, Russia.jpg" alt="Лесной массив города Сочи" class="card__photo">
+          <div class="card__panel">
+            <h2 class="card__title">Сочи</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="./images/Venice.jpg" alt="Улицы Венеции" class="card__photo">
+          <div class="card__panel">
+            <h2 class="card__title">Венеция</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+        <div class="card">
+          <img src="./images/Vienna, Austria.jpg" alt="Улицы Вены" class="card__photo">
+          <div class="card__panel">
+            <h2 class="card__title">Вена</h2>
+            <button class="card__like-button"></button>
+          </div>
+        </div>
+      </secttion>
+    </main>
+    <footer class="footer">
+      &copy; 2020 Mesto Russia
+    </footer>
+    <!--Попап-->
+    <section class="popup">
+      <div class="popup__container">
+        <button class="popup__button-close"></button>
+        <form class="popup__form">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input type="text" class="popup__name" name="username">
+          <input type="text" class="popup__info" name="userinfo">
+          <button class="popup__button-sumbit" type="button">Сохранить</button>
+        </form>
+        
+      </div>
+    </section>
+  </div>
+  <script src="./scripts/script.js"></script>
+</body>
+
+
+</html>

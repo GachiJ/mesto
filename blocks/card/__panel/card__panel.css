@@ -1,0 +1,6 @@
+.card__panel {
+  padding: 0 20px;
+  height: 79px;
+  display: flex;
+  justify-content: space-between;
+}
