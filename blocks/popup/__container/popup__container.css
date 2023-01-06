@@ -1,5 +1,11 @@
 .popup__container {
-  width: 282px;
   display: grid;
   gap: 16px;
+}
+
+@media screen and (min-width: 1280px) {
+  .popup__container {
+    width: 470px;
+    gap: 8px;
+  }
 }

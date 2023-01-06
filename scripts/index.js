@@ -12,12 +12,12 @@ popupClose.addEventListener('click', function () {
 })
 
 /*Кнопка сохранить*/
-document.querySelector('.popup__name').defaultValue = document.querySelector('.profile__title').textContent
-document.querySelector('.popup__info').defaultValue = document.querySelector('.profile__subtitle').textContent
+document.querySelector('.popup__input_type_name').defaultValue = document.querySelector('.profile__title').textContent
+document.querySelector('.popup__input_type_info').defaultValue = document.querySelector('.profile__subtitle').textContent
 
 var sumbit = document.querySelector('.popup__button-sumbit')
 sumbit.addEventListener('click', function () {
-  document.querySelector('.profile__title').textContent = document.querySelector('.popup__name').value
-  document.querySelector('.profile__subtitle').textContent = document.querySelector('.popup__info').value
+  document.querySelector('.profile__title').textContent = document.querySelector('.popup__input_type_name').value
+  document.querySelector('.profile__subtitle').textContent = document.querySelector('.popup__input_type_info').value
   popup.classList.remove('popup__open');
 })

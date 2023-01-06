@@ -11,5 +11,6 @@
     margin: 0 244px 0 30px;
     text-align: start;
     gap: 16px 18px;
+    max-width: 336px;
   }
 }
