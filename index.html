@@ -22,62 +22,56 @@
           <button class="profile__edit-button" type="button"></button>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <button class="profile__add-button" type="button" aria-label="Мне нравиться"></button>
+        <button class="profile__add-button" type="button" aria-label="Мне нравится"></button>
       </section>
       <section class="cards" aria-label="Карточик">
         <article class="card">
           <img src="./images/Canada.jpg" alt="Пейзаж парка Гарибальди" class="card__photo">
-          <ul class="card__panel">
-            <li>
-              <h2 class="card__title">парк Гарибальди</h2>
-            </li>
-            <li> <button class="card__like-button" type="button" aria-label="Мне нравиться"></button></li>
-          </ul>
+          <div class="card__panel">
+            <h2 class="card__title">парк Гарибальди</h2>
+            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
+          </div>
         </article>
         <article class="card">
           <img src="./images/Japan.jpg" alt="Вид на Токио с высоты птичьего полета" class="card__photo">
-          <ul class="card__panel">
-            <li>
-              <h2 class="card__title">Токио</h2>
-            </li>
-            <li> <button class="card__like-button" type="button" aria-label="Мне нравиться"></button></li>
-          </ul>
+          <div class="card__panel">
+
+            <h2 class="card__title">Токио</h2>
+
+            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
+          </div>
         </article>
         <article class="card">
           <img src="./images/Rome.jpg" alt="Рим" class="card__photo">
-          <ul class="card__panel">
-            <li>
-              <h2 class="card__title">Рим</h2>
-            </li>
-            <li> <button class="card__like-button" type="button" aria-label="Мне нравиться"></button></li>
-          </ul>
+          <div class="card__panel">
+
+            <h2 class="card__title">Рим</h2>
+
+            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
+          </div>
         </article>
         <article class="card">
           <img src="./images/Sochi.jpg" alt="Лесной массив города Сочи" class="card__photo">
-          <ul class="card__panel">
-            <li>
-              <h2 class="card__title">Сочи</h2>
-            </li>
-            <li> <button class="card__like-button" type="button" aria-label="Мне нравиться"></button></li>
-          </ul>
+          <div class="card__panel">
+
+            <h2 class="card__title">Сочи</h2>
+
+            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
+          </div>
         </article>
         <article class="card">
           <img src="./images/Venice.jpg" alt="Улицы Венеции" class="card__photo">
-          <ul class="card__panel">
-            <li>
-              <h2 class="card__title">Венеция</h2>
-            </li>
-            <li><button class="card__like-button" type="button" aria-label="Мне нравиться"></button></li>
-          </ul>
+          <div class="card__panel">
+            <h2 class="card__title">Венеция</h2>
+            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
+          </div>
         </article>
         <article class="card">
           <img src="./images/Vienna.jpg" alt="Улицы Вены" class="card__photo">
-          <ul class="card__panel">
-            <li>
-              <h2 class="card__title">Вена</h2>
-            </li>
-            <li> <button class="card__like-button" type="button" aria-label="Мне нравиться"></button></li>
-          </ul>
+          <div class="card__panel">
+            <h2 class="card__title">Вена</h2>
+            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
+          </div>
         </article>
       </section>
     </main>
@@ -91,7 +85,7 @@
         <form class="popup__form" name="profile-form">
           <h2 class="popup__title">Редактировать профиль</h2>
           <input type="text" class="popup__input popup__input_type_name" name="username" placeholder="Введите имя">
-          <input type="text" class="popup__input popup__input_type_info" name="userinfo">
+          <input type="text" class="popup__input popup__input_type_info" name="userinfo" placeholder="Ваши интересы">
           <button class="popup__button-sumbit" type="submit">Сохранить</button>
         </form>
 
