@@ -24,67 +24,60 @@
         </div>
         <button class="profile__add-button" type="button" aria-label="Добавить пост"></button>
       </section>
-      <section class="cards" aria-label="Карточик">
-        <article class="card">
-          <img src="./images/Canada.jpg" alt="Пейзаж парка Гарибальди" class="card__photo">
-          <div class="card__panel">
-            <h2 class="card__title">парк Гарибальди</h2>
-            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/Japan.jpg" alt="Вид на Токио с высоты птичьего полета" class="card__photo">
-          <div class="card__panel">
-            <h2 class="card__title">Токио</h2>
-            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/Rome.jpg" alt="Рим" class="card__photo">
-          <div class="card__panel">
-            <h2 class="card__title">Рим</h2>
-            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/Sochi.jpg" alt="Лесной массив города Сочи" class="card__photo">
-          <div class="card__panel">
-            <h2 class="card__title">Сочи</h2>
-            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/Venice.jpg" alt="Улицы Венеции" class="card__photo">
-          <div class="card__panel">
-            <h2 class="card__title">Венеция</h2>
-            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/Vienna.jpg" alt="Улицы Вены" class="card__photo">
-          <div class="card__panel">
-            <h2 class="card__title">Вена</h2>
-            <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
-          </div>
-        </article>
+      <section class="cards" aria-label="Карточки">
+        <template class="template">
+          <article class="card">
+            <button type="button" class="card__delete-button"></button>
+            <img class="card__photo">
+            <div class="card__panel">
+              <h2 class="card__title"></h2>
+              <button class="card__like-button" type="button" aria-label="Мне нравится"></button>
+            </div>
+          </article>
+        </template>
       </section>
     </main>
     <footer class="footer">
-      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+      <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
 
     <div class="popup">
       <div class="popup__container">
-        <button class="popup__button-close" type="button" aria-label="Закрытие попапа"></button>
-        <form class="popup__form" name="profile-form">
+        <button class="popup__button-close" type="button" aria-label="Закрытие попапа"
+          id="popup-edit-button-close"></button>
+        <form class="popup__form" name="profile-form" id="profile-form">
           <h2 class="popup__title">Редактировать профиль</h2>
           <input type="text" class="popup__input popup__input_type_name" name="username" placeholder="Введите имя">
           <input type="text" class="popup__input popup__input_type_info" name="userinfo" placeholder="Ваши интересы">
-          <button class="popup__button-sumbit" type="submit">Сохранить</button>
+          <button class="popup__button-submit" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
+
+    <div class="popup popup_type_add-photo">
+      <div class="popup__container">
+        <button class="popup__button-close" type="button" aria-label="Закрытие попапа"
+          id="popup-type-photo-button-close"></button>
+        <form class="popup__form" name="form-add-card" id="form-add-card">
+          <h2 class="popup__title">Новое место</h2>
+          <input type="text" class="popup__input popup__input_card_title" name="photo-title" placeholder="Название">
+          <input type="url" class="popup__input popup__input_card_url" name="photo-url"
+            placeholder="Ссылка на картинку">
+          <button class="popup__button-submit" type="submit">Создать</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_type_photo">
+      <div class="popup__container">
+        <button class="popup__button-close" type="button" id="popup-photo-button-close"></button>
+        <img class="popup__photo" src="#" alt="Фото">
+        <h3 class="popup__caption">Фото</h3>
+      </div>
+    </div>
   </div>
+
+
   <script src="./scripts/index.js"></script>
 </body>
 

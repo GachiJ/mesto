@@ -5,8 +5,7 @@
 
 @media screen and (min-width: 1280px) {
   .popup__container {
-    max-width: 470px;
-    width: 100%;
+   position: absolute;
     gap: 8px;
   }
 }
