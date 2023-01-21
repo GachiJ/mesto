@@ -27,9 +27,9 @@ popupOpen.addEventListener('click', function openEditPopup() {
 
 
 closeButtons.forEach(function (button) {
-   
+
   const popup = button.closest('.popup');
-  
+
   button.addEventListener('click', function () { closePopup(popup) });
 });
 
@@ -78,7 +78,8 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
+const cardPhoto = document.querySelectorAll('.card__photo')
+const cardCaption = document.querySelectorAll('.card__title')
 const cardList = document.querySelector('.cards')
 const cardTemplate = document.querySelector('.template').content
 
@@ -106,9 +107,9 @@ function createCard(name, link) {
 
   CardPhoto.addEventListener('click', function () {
     openPopup(popupTypePhoto);
-
-    fullScreenPhoto.src = document.querySelector('.card__photo').src;
-    caption.textContent = document.querySelector('.card__title').textContent;
+    
+    fullScreenPhoto.src = link;
+    caption.textContent = name;
   })
 
   return cardElement
@@ -120,13 +121,13 @@ initialCards.forEach(function (ele) {
 
 
 const sumbitCardForm = document.querySelector('#form-add-card');
-const InputCardTitle = document.querySelector('.popup__input_card_title');
-const InputCardUrl = document.querySelector('.popup__input_card_url');
+const inputCardTitle = document.querySelector('.popup__input_card_title');
+const inputCardUrl = document.querySelector('.popup__input_card_url');
 
 sumbitCardForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
-  cardList.prepend(createCard(InputCardTitle.value, InputCardUrl.value));
+  cardList.prepend(createCard(inputCardTitle.value, inputCardUrl.value));
 
   evt.target.reset();
 
