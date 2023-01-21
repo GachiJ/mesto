@@ -38,8 +38,10 @@ const sumbitForm = document.querySelector('#profile-form');
 
 sumbitForm.addEventListener('submit', function submit(evt) {
   evt.preventDefault();
-  profileSubtitle.textContent = popupInputName.value;
+  profileTitle.textContent = popupInputName.value;
   profileSubtitle.textContent = popupInputInfo.value;
+
+  profilePopup.classList.remove('popup_opened')
 })
 
 
