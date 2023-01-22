@@ -41,7 +41,7 @@ sumbitForm.addEventListener('submit', function submit(evt) {
   profileTitle.textContent = popupInputName.value;
   profileSubtitle.textContent = popupInputInfo.value;
 
-  profilePopup.classList.remove('popup_opened')
+  closePopup(profilePopup)
 })
 
 
@@ -80,8 +80,8 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-const cardPhoto = document.querySelectorAll('.card__photo')
-const cardCaption = document.querySelectorAll('.card__title')
+
+
 const cardList = document.querySelector('.cards')
 const cardTemplate = document.querySelector('.template').content
 
@@ -105,13 +105,14 @@ function createCard(name, link) {
   })
 
 
-  const CardPhoto = cardElement.querySelector('.card__photo');
+  const cardPhoto = cardElement.querySelector('.card__photo');
 
-  CardPhoto.addEventListener('click', function () {
+  cardPhoto.addEventListener('click', function () {
     openPopup(popupTypePhoto);
     
     fullScreenPhoto.src = link;
     caption.textContent = name;
+    fullScreenPhoto.setAttribute('alt', 'Фотография ' + name);
   })
 
   return cardElement
@@ -133,5 +134,5 @@ sumbitCardForm.addEventListener('submit', function (evt) {
 
   evt.target.reset();
 
-  popupTypeAddPhoto.classList.remove('popup_opened');
+  closePopup(popupTypeAddPhoto);
 })
