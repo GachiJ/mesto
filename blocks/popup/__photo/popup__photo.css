@@ -1,4 +1,7 @@
 .popup__photo {
-  max-width: 75vw;
-  max-height: 75vh;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  max-height: 100%;
+  max-width: 100%;
 }

@@ -1,6 +1,9 @@
 .popup__container {
   display: grid;
   gap: 16px;
+  max-width: 75vw;
+  max-height: 75vh;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 1280px) {
