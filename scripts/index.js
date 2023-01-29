@@ -10,7 +10,6 @@ const fullScreenPhoto = document.querySelector('.popup__photo');
 const caption = document.querySelector('.popup__caption');
 const popupTypePhoto = document.querySelector('.popup_type_photo');
 
-
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
