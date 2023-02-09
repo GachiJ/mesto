@@ -1,0 +1,18 @@
+.error {
+  max-width: 238px;
+  width: 100%;
+  margin: 10px;
+  display: block;
+  margin: 0 auto;
+  text-align: start;
+  font-size: 12px;
+  line-height: 15px;
+  color: red;
+}
+
+@media screen and (min-width: 1280px) {
+  .error {
+    max-width: 358px;
+    margin: 0 36px;
+  }
+}
