@@ -4,6 +4,7 @@
   grid-template-columns: 1fr min-content;
   margin: 26px 38px 33px 65px;
   gap: 8px 10px;
+  width: 216px;
 }
 
 @media screen and (min-width: 1280px) {
@@ -11,6 +12,6 @@
     margin: 0 244px 0 30px;
     text-align: start;
     gap: 6px 18px;
-    max-width: 336px;
+    width: 336px;
   }
 }

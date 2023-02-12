@@ -7,6 +7,8 @@
   font-size: 12px;
   line-height: 15px;
   color: red;
+  position: absolute;
+  margin: 0 22px;
 }
 
 @media screen and (min-width: 1280px) {

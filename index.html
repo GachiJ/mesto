@@ -64,12 +64,12 @@
           id="popup-type-photo-button-close"></button>
         <form class="popup__form" name="form-add-card" id="form-add-card" novalidate>
           <h2 class="popup__title">Новое место</h2>
-          <input type="text" class="popup__input popup__input_card_title" name="photo-title" id="input-name-photo" placeholder="Название"
-            required minlength="2" maxlength="40">
-            <span class="error" id="input-name-photo-error"></span>
-          <input type="url" class="popup__input popup__input_card_url" name="photo-url" id="input-url" placeholder="Ссылка на картинку"
-            required pattern="https?://.+">
-            <span class="error" id="input-url-error"></span>
+          <input type="text" class="popup__input popup__input_card_title" name="photo-title" id="input-name-photo"
+            placeholder="Название" required minlength="2" maxlength="40">
+          <span class="error" id="input-name-photo-error"></span>
+          <input type="url" class="popup__input popup__input_card_url" name="photo-url" id="input-url"
+            placeholder="Ссылка на картинку" required pattern="https?://.+">
+          <span class="error" id="input-url-error"></span>
           <button class="popup__button-submit" type="submit">Создать</button>
         </form>
       </div>
@@ -86,6 +86,7 @@
 
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validation.js"></script>
 </body>
 
 

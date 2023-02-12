@@ -8,37 +8,47 @@ const profileSubtitle = document.querySelector('.profile__subtitle')
 const fullScreenPhoto = document.querySelector('.popup__photo');
 const caption = document.querySelector('.popup__caption');
 const popupTypePhoto = document.querySelector('.popup_type_photo');
-const popup = document.querySelector('.popup');
+const popups = document.querySelectorAll('.popup');
 
+
+
+function closePopupEsc(evt) {
+  const popup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(popup);
+  }
+};
+
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.currentTarget && evt.target === document.querySelector('.popup_opened')) {
+      closePopup(evt.currentTarget);
+    }
+  })
+});
 
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 
+  document.addEventListener('keydown', closePopupEsc)
 
-
-  document.addEventListener('keydown', (evt) => {
-    if (document.querySelector('.popup_opened') && evt.key === 'Escape') {
-      closePopup(popup);
-    }
-  })
-
-  document.addEventListener('click', (evt) => {
-    if (document.querySelector('.popup_opened') && evt.target === document.querySelector('.popup_opened')) {
-      closePopup(popup);
-    }
-  })
+  enableValidation(formValidationConfig);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+
+  document.removeEventListener('keydown', closePopupEsc)
 }
+
+
+
 
 popupEditProfileOpen.addEventListener('click', function openEditPopup() {
   openPopup(profilePopup);
   popupInputName.value = profileTitle.textContent;
   popupInputInfo.value = profileSubtitle.textContent;
-
 })
 
 closeButtons.forEach(function (button) {
@@ -105,9 +115,11 @@ const cardTemplate = document.querySelector('.template').content
 function createCard(name, link) {
 
   const cardElement = cardTemplate.cloneNode(true);
+  const cardPhoto = cardElement.querySelector('.card__photo');
+
   cardElement.querySelector('.card__title').textContent = name;
-  cardElement.querySelector('.card__photo').src = link;
-  cardElement.querySelector('.card__photo').setAttribute('alt', 'Фотография ' + name);
+  cardPhoto.src = link;
+  cardPhoto.setAttribute('alt', 'Фотография ' + name);
 
 
   const cardLikeButton = cardElement.querySelector('.card__like-button');
@@ -122,7 +134,7 @@ function createCard(name, link) {
   })
 
 
-  const cardPhoto = cardElement.querySelector('.card__photo');
+
 
   cardPhoto.addEventListener('click', function () {
     openPopup(popupTypePhoto);
@@ -154,69 +166,3 @@ sumbitCardForm.addEventListener('submit', function (evt) {
 
   closePopup(popupTypeAddPhoto);
 })
-
-
-
-const formValidationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  errorClass: 'popup__input_type_error',
-  buttonSelector: '.popup__button-submit',
-  buttonDisabledClass: 'popup__button-submit_disabled',
-};
-
-function enableValidation(config) {
-  const formList = document.querySelectorAll(config.formSelector);
-
-  formList.forEach(function (form) {
-
-    addFunctionLisiners(form, config);
-
-    form.addEventListener('input', function () {
-      toggleButton(config, form);
-    });
-  });
-};
-
-
-function handleFormInput(evt, config) {
-  const input = evt.target;
-  const inputId = input.id;
-  const errorElement = document.querySelector(`#${inputId}-error`);
-
-
-  if (input.validity.valid) {
-    input.classList.remove(config.errorClass);
-    errorElement.textContent = '';
-  } else {
-    input.classList.add(config.errorClass);
-    errorElement.textContent = input.validationMessage;
-  }
-}
-
-function toggleButton(config, form) {
-  const buttonSubmit = form.querySelector(config.buttonSelector);
-
-
-  const isFormvalid = form.checkValidity();
-
-  buttonSubmit.disabled = !isFormvalid;
-  buttonSubmit.classList.toggle(config.buttonDisabledClass, !isFormvalid);
-}
-
-
-
-function addFunctionLisiners(form, config) {
-  const inputList = form.querySelectorAll(config.inputSelector);
-
-
-  inputList.forEach(function (item) {
-    item.addEventListener('input', function (evt) {
-      handleFormInput(evt, config)
-    });
-  });
-}
-
-
-
-enableValidation(formValidationConfig);
