@@ -13,15 +13,16 @@ const popups = document.querySelectorAll('.popup');
 
 
 function closePopupEsc(evt) {
-  const popup = document.querySelector('.popup_opened');
+
   if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
     closePopup(popup);
   }
 };
 
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
-    if (evt.currentTarget && evt.target === document.querySelector('.popup_opened')) {
+    if (evt.currentTarget === evt.target) {
       closePopup(evt.currentTarget);
     }
   })
@@ -32,8 +33,6 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 
   document.addEventListener('keydown', closePopupEsc)
-
-  enableValidation(formValidationConfig);
 }
 
 function closePopup(popup) {
@@ -75,8 +74,13 @@ sumbitForm.addEventListener('submit', function submit(evt) {
 const popupTypeAddPhotoOpen = document.querySelector('.profile__add-button');
 const popupTypeAddPhoto = document.querySelector('.popup_type_add-photo');
 
+
 popupTypeAddPhotoOpen.addEventListener('click', function openTypeAddPhotoPopup() {
   openPopup(popupTypeAddPhoto);
+  const popupButtonSubmit = popupTypeAddPhoto.querySelector('.popup__button-submit');
+
+  popupButtonSubmit.setAttribute('disabled', true);
+  popupButtonSubmit.classList.add('popup__button-submit_disabled');
 })
 
 
