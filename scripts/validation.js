@@ -40,11 +40,7 @@ function handleFormInput(evt, config) {
 
 function toggleButton(config, form) {
   const buttonSubmit = form.querySelector(config.buttonSelector);
-
-
-
   const isFormvalid = form.checkValidity();
-
 
 
   buttonSubmit.disabled = !isFormvalid;
