@@ -8,37 +8,46 @@ const profileSubtitle = document.querySelector('.profile__subtitle')
 const fullScreenPhoto = document.querySelector('.popup__photo');
 const caption = document.querySelector('.popup__caption');
 const popupTypePhoto = document.querySelector('.popup_type_photo');
-const popup = document.querySelector('.popup');
+const popups = document.querySelectorAll('.popup');
 
+
+
+function closePopupEsc(evt) {
+
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+};
+
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.currentTarget === evt.target) {
+      closePopup(evt.currentTarget);
+    }
+  })
+});
 
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 
-
-
-  document.addEventListener('keydown', (evt) => {
-    if (document.querySelector('.popup_opened') && evt.key === 'Escape') {
-      closePopup(popup);
-    }
-  })
-
-  document.addEventListener('click', (evt) => {
-    if (document.querySelector('.popup_opened') && evt.target === document.querySelector('.popup_opened')) {
-      closePopup(popup);
-    }
-  })
+  document.addEventListener('keydown', closePopupEsc)
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+
+  document.removeEventListener('keydown', closePopupEsc)
 }
+
+
+
 
 popupEditProfileOpen.addEventListener('click', function openEditPopup() {
   openPopup(profilePopup);
   popupInputName.value = profileTitle.textContent;
   popupInputInfo.value = profileSubtitle.textContent;
-
 })
 
 closeButtons.forEach(function (button) {
@@ -65,13 +74,18 @@ sumbitForm.addEventListener('submit', function submit(evt) {
 const popupTypeAddPhotoOpen = document.querySelector('.profile__add-button');
 const popupTypeAddPhoto = document.querySelector('.popup_type_add-photo');
 
+
 popupTypeAddPhotoOpen.addEventListener('click', function openTypeAddPhotoPopup() {
   openPopup(popupTypeAddPhoto);
+  const popupButtonSubmit = popupTypeAddPhoto.querySelector('.popup__button-submit');
+
+  popupButtonSubmit.setAttribute('disabled', true);
+  popupButtonSubmit.classList.add('popup__button-submit_disabled');
 })
 
 
 
-const initialCards = [
+/* const initialCards = [
   {
     name: 'Альпы',
     link: 'https://images.unsplash.com/photo-1673055022236-0bce66b62569?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
@@ -105,9 +119,11 @@ const cardTemplate = document.querySelector('.template').content
 function createCard(name, link) {
 
   const cardElement = cardTemplate.cloneNode(true);
+  const cardPhoto = cardElement.querySelector('.card__photo');
+
   cardElement.querySelector('.card__title').textContent = name;
-  cardElement.querySelector('.card__photo').src = link;
-  cardElement.querySelector('.card__photo').setAttribute('alt', 'Фотография ' + name);
+  cardPhoto.src = link;
+  cardPhoto.setAttribute('alt', 'Фотография ' + name);
 
 
   const cardLikeButton = cardElement.querySelector('.card__like-button');
@@ -122,7 +138,7 @@ function createCard(name, link) {
   })
 
 
-  const cardPhoto = cardElement.querySelector('.card__photo');
+
 
   cardPhoto.addEventListener('click', function () {
     openPopup(popupTypePhoto);
@@ -138,8 +154,23 @@ function createCard(name, link) {
 initialCards.forEach(function (ele) {
   cardList.append(createCard(ele.name, ele.link))
 })
+ */
 
+/* const sumbitCardForm = document.querySelector('#form-add-card');
+const inputCardTitle = document.querySelector('.popup__input_card_title');
+const inputCardUrl = document.querySelector('.popup__input_card_url');
 
+sumbitCardForm.addEventListener('submit', function (evt) {
+  evt.preventDefault();
+
+  
+  cardList.prepend(createCard(inputCardTitle.value, inputCardUrl.value));
+
+  evt.target.reset();
+
+  closePopup(popupTypeAddPhoto);
+})
+ */
 const sumbitCardForm = document.querySelector('#form-add-card');
 const inputCardTitle = document.querySelector('.popup__input_card_title');
 const inputCardUrl = document.querySelector('.popup__input_card_url');
@@ -147,76 +178,16 @@ const inputCardUrl = document.querySelector('.popup__input_card_url');
 sumbitCardForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
+  const data = {};
 
-  cardList.prepend(createCard(inputCardTitle.value, inputCardUrl.value));
+  data.name = inputCardTitle.value;
+  data.link = inputCardUrl.value;
+
+  const card = new Card(data, '.template');
+  const cardElement = card.generateCard();
+  cardList.prepend(cardElement);
 
   evt.target.reset();
 
   closePopup(popupTypeAddPhoto);
 })
-
-
-
-const formValidationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  errorClass: 'popup__input_type_error',
-  buttonSelector: '.popup__button-submit',
-  buttonDisabledClass: 'popup__button-submit_disabled',
-};
-
-function enableValidation(config) {
-  const formList = document.querySelectorAll(config.formSelector);
-
-  formList.forEach(function (form) {
-
-    addFunctionLisiners(form, config);
-
-    form.addEventListener('input', function () {
-      toggleButton(config, form);
-    });
-  });
-};
-
-
-function handleFormInput(evt, config) {
-  const input = evt.target;
-  const inputId = input.id;
-  const errorElement = document.querySelector(`#${inputId}-error`);
-
-
-  if (input.validity.valid) {
-    input.classList.remove(config.errorClass);
-    errorElement.textContent = '';
-  } else {
-    input.classList.add(config.errorClass);
-    errorElement.textContent = input.validationMessage;
-  }
-}
-
-function toggleButton(config, form) {
-  const buttonSubmit = form.querySelector(config.buttonSelector);
-
-
-  const isFormvalid = form.checkValidity();
-
-  buttonSubmit.disabled = !isFormvalid;
-  buttonSubmit.classList.toggle(config.buttonDisabledClass, !isFormvalid);
-}
-
-
-
-function addFunctionLisiners(form, config) {
-  const inputList = form.querySelectorAll(config.inputSelector);
-
-
-  inputList.forEach(function (item) {
-    item.addEventListener('input', function (evt) {
-      handleFormInput(evt, config)
-    });
-  });
-}
-
-
-
-enableValidation(formValidationConfig);
