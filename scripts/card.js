@@ -1,3 +1,5 @@
+import { openPopup } from "./index.js";
+
 const initialCards = [
   {
     name: 'Альпы',
@@ -25,41 +27,100 @@ const initialCards = [
   }
 ];
 
-/* const cardList = document.querySelector('.cards') */
-const templateSelector = document.querySelector('.template');
+const cardList = document.querySelector('.cards');
 
 class Card {
-  constructor(name, link, templateSelector) {
-    this._name = name;
-    this._link = link;
+  constructor(data, templateSelector) {
+
+    this._name = data.name;
+    this._link = data.link;
     this._templateSelector = templateSelector;
   }
 
   _getTemplate() {
-    
     const cardElement = document
-    .querySelector(this._templateSelector)
-    .content
-    .querySelector('.card')
-    .cloneNode(true)
+      .querySelector(this._templateSelector)
+      .content
+      .querySelector('.card')
+      .cloneNode(true);
 
     return cardElement;
   }
 
-  generatedCard (){
+
+  _setEventListener() {
+    const cardLikeButton = this._element
+      .querySelector('.card__like-button');
+
+    cardLikeButton.addEventListener('click', () => {
+      this._getLikeButton()
+    })
+
+
+    const deleteButton = this._element
+      .querySelector('.card__delete-button');
+
+    deleteButton.addEventListener('click', () => {
+      this._getDeleteButton()
+    });
+
+
+    const cardPhoto = this._element.querySelector('.card__photo');
+
+    cardPhoto.addEventListener('click', () => {
+      this._getFullScreenPhoto()
+    })
+  }
+
+
+
+  _getLikeButton() {
+    this._element
+      .querySelector('.card__like-button').classList.toggle('card__like-button_type_active');
+  }
+
+
+
+  _getDeleteButton() {
+    this._element.remove();
+  }
+
+
+
+  _getFullScreenPhoto() {
+    const fullScreenPhoto = document.querySelector('.popup__photo');
+    const caption = document.querySelector('.popup__caption');
+    const popupTypePhoto = document.querySelector('.popup_type_photo');
+
+
+    openPopup(popupTypePhoto);
+
+    fullScreenPhoto.src = this._link;
+    caption.textContent = this._name;
+    fullScreenPhoto.setAttribute('alt', 'Фотография ' + this._name);
+  }
+
+
+  generateCard() {
     this._element = this._getTemplate();
+
+    this._setEventListener();
 
     this._element.querySelector('.card__photo').src = this._link;
     this._element.querySelector('.card__title').textContent = this._name;
+
 
     return this._element;
   }
 }
 
-initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link, '.template');
-  const cardElement = card.generatedCard();
 
-  // Добавляем в DOM
-  document.querySelector('.cards').append(cardElement);
+initialCards.forEach((item) => {
+  const card = new Card(item, '.template');
+  const cardElement = card.generateCard();
+
+
+  cardList.append(cardElement);
 })
+
+export default Card

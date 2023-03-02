@@ -1,3 +1,7 @@
+import validation from './validation.js';
+import Card from './card.js';
+import { formValidationConfig } from './validation.js';
+
 const popupEditProfileOpen = document.querySelector('.profile__edit-button');
 const closeButtons = document.querySelectorAll('.popup__button-close');
 const profilePopup = document.querySelector('.popup_type_edit-profile');
@@ -5,10 +9,9 @@ const popupInputName = document.querySelector('.popup__input_type_name')
 const popupInputInfo = document.querySelector('.popup__input_type_info')
 const profileTitle = document.querySelector('.profile__title')
 const profileSubtitle = document.querySelector('.profile__subtitle')
-const fullScreenPhoto = document.querySelector('.popup__photo');
-const caption = document.querySelector('.popup__caption');
-const popupTypePhoto = document.querySelector('.popup_type_photo');
+const formAddCard = document.querySelector('#form-add-card');
 const popups = document.querySelectorAll('.popup');
+const cardList = document.querySelector('.cards')
 
 
 
@@ -29,7 +32,7 @@ popups.forEach((popup) => {
 });
 
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
 
   document.addEventListener('keydown', closePopupEsc)
@@ -58,9 +61,9 @@ closeButtons.forEach(function (button) {
 });
 
 
-const sumbitForm = document.querySelector('#profile-form');
+const profileForm = document.querySelector('#profile-form');
 
-sumbitForm.addEventListener('submit', function submit(evt) {
+profileForm.addEventListener('submit', function submit(evt) {
   evt.preventDefault();
 
 
@@ -84,78 +87,6 @@ popupTypeAddPhotoOpen.addEventListener('click', function openTypeAddPhotoPopup()
 })
 
 
-
-const initialCards = [
-  {
-    name: 'Альпы',
-    link: 'https://images.unsplash.com/photo-1673055022236-0bce66b62569?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-  },
-  {
-    name: 'Афганистан',
-    link: 'https://images.unsplash.com/photo-1673860503924-e8085c807ca1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Норвегия',
-    link: 'https://images.unsplash.com/photo-1672506107198-865adfdf6db6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-
-const cardList = document.querySelector('.cards')
-const cardTemplate = document.querySelector('.template').content
-
-function createCard(name, link) {
-
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardPhoto = cardElement.querySelector('.card__photo');
-
-  cardElement.querySelector('.card__title').textContent = name;
-  cardPhoto.src = link;
-  cardPhoto.setAttribute('alt', 'Фотография ' + name);
-
-
-  const cardLikeButton = cardElement.querySelector('.card__like-button');
-  cardLikeButton.addEventListener('click', function (evt) {
-    evt.target.classList.toggle('card__like-button_type_active');
-  })
-
-
-  const deleteButton = cardElement.querySelector('.card__delete-button');
-  deleteButton.addEventListener('click', function (evt) {
-    evt.target.closest('.card').remove();
-  })
-
-
-
-
-  cardPhoto.addEventListener('click', function () {
-    openPopup(popupTypePhoto);
-
-    fullScreenPhoto.src = link;
-    caption.textContent = name;
-    fullScreenPhoto.setAttribute('alt', 'Фотография ' + name);
-  })
-
-  return cardElement
-}
-
-initialCards.forEach(function (ele) {
-  cardList.append(createCard(ele.name, ele.link))
-})
-
-
 const sumbitCardForm = document.querySelector('#form-add-card');
 const inputCardTitle = document.querySelector('.popup__input_card_title');
 const inputCardUrl = document.querySelector('.popup__input_card_url');
@@ -163,10 +94,21 @@ const inputCardUrl = document.querySelector('.popup__input_card_url');
 sumbitCardForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
+  const data = {};
 
-  cardList.prepend(createCard(inputCardTitle.value, inputCardUrl.value));
+  data.name = inputCardTitle.value;
+  data.link = inputCardUrl.value;
+
+  const card = new Card(data, '.template');
+  const cardElement = card.generateCard();
+  cardList.prepend(cardElement);
 
   evt.target.reset();
 
   closePopup(popupTypeAddPhoto);
 })
+
+const validationProfile = new validation(formValidationConfig, profileForm);
+const validationAddCard = new validation(formValidationConfig, formAddCard);
+validationProfile.enableValidation();
+validationAddCard.enableValidation();
