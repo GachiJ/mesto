@@ -1,3 +1,5 @@
+import { openPopup } from "./index.js";
+
 const initialCards = [
   {
     name: 'Альпы',
@@ -88,6 +90,8 @@ class Card {
   _getFullScreenPhoto() {
     const fullScreenPhoto = document.querySelector('.popup__photo');
     const caption = document.querySelector('.popup__caption');
+    const popupTypePhoto = document.querySelector('.popup_type_photo');
+
 
     openPopup(popupTypePhoto);
 
@@ -118,3 +122,5 @@ initialCards.forEach((item) => {
 
   cardList.append(cardElement);
 })
+
+export default Card
