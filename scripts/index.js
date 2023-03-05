@@ -1,4 +1,4 @@
-import FormValidator from './Validation.js';
+import FormValidator from './FormValidator.js';
 import Card from './Сard.js';
 import { initialCards, formValidationConfig } from "./variables.js";
 
@@ -58,6 +58,7 @@ popupEditProfileOpen.addEventListener('click', function openEditPopup() {
   openPopup(profilePopup);
   popupInputName.value = profileTitle.textContent;
   popupInputInfo.value = profileSubtitle.textContent;
+  validationProfile.resetValidation();
 })
 
 closeButtons.forEach(function (button) {
@@ -86,8 +87,10 @@ const popupTypeAddPhoto = document.querySelector('.popup_type_add-photo');
 
 
 popupTypeAddPhotoOpen.addEventListener('click', function openTypeAddPhotoPopup() {
+  
+  formAddCard.reset();
+  validationAddCard.resetValidation();
   openPopup(popupTypeAddPhoto);
-  validationProfile();
 })
 
 initialCards.forEach((item) => {
@@ -107,9 +110,10 @@ const sumbitCardForm = document.querySelector('#form-add-card');
 const inputCardTitle = document.querySelector('.popup__input_card_title');
 const inputCardUrl = document.querySelector('.popup__input_card_url');
 
-sumbitCardForm.addEventListener('submit', function (evt, toggleButton) {
+sumbitCardForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
+  
   const data = {};
 
   data.name = inputCardTitle.value;
@@ -120,20 +124,14 @@ sumbitCardForm.addEventListener('submit', function (evt, toggleButton) {
 
   formAddCard.reset();
 
-  validationAddCard();
 
   closePopup(popupTypeAddPhoto);
 })
 
-function validationAddCard() {
+
   const validationAddCard = new FormValidator(formValidationConfig, formAddCard);
   validationAddCard.enableValidation();
-}
 
-function validationProfile() {
+ 
   const validationProfile = new FormValidator(formValidationConfig, profileForm);
   validationProfile.enableValidation();
-}
-
-validationAddCard();
-validationProfile();
