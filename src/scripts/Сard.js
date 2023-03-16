@@ -1,11 +1,11 @@
 class Card {
-  constructor(data, templateSelector, handleOpenPopup) {
+  constructor(data, templateSelector, handleCardClick) {
 
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
 
-    this._handleOpenPopup = handleOpenPopup;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -37,10 +37,8 @@ class Card {
     });
 
 
-    this._cardImage = this._element.querySelector('.card__photo');
-
-    this._cardImage.addEventListener('click', () => {
-      this._handleOpenPopup(this._name, this._link)
+    this._element.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link)
     });
   }
 
@@ -60,7 +58,6 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-
     this._setEventListener();
 
     this._element.querySelector('.card__photo').src = this._link;
