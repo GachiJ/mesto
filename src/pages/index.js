@@ -1,14 +1,17 @@
-import FormValidator from './scripts/FormValidator.js';
-import Card from './scripts/Сard.js';
-import Section from './scripts/Section.js';
-import PopupWithImage from './scripts/PopupWithImage.js';
-import PopupWithForm from './scripts/PopupWithForm.js';
-import UserInfo from './scripts/UserInfo.js';
-import { initialCards, formValidationConfig, popupEditProfileOpen, profilePopup, popupInputName, popupInputInfo, formAddCard, cardsContainer, popupFullScreenImage, popupTypeAddPhotoOpen, popupTypeAddPhoto, inputCardTitle, inputCardUrl, profileForm, addCardPopup } from "./scripts/variables.js";
-import Popup from './scripts/Popup.js';
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Сard.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import {  popupEditProfileOpen, profilePopup, popupInputName, 
+  popupInputInfo, formAddCard, cardsContainer, popupFullScreenImage, popupTypeAddPhotoOpen, 
+  popupTypeAddPhoto, inputCardTitle, inputCardUrl, profileForm, addCardPopup } from "../utils/constants.js";
+import { initialCards, formValidationConfig } from '../utils/variables.js'
+import Popup from '../components/Popup.js';
 // index.js
 
-import './index.css'; // добавьте импорт главного файла стилей
+import './index.css';
 
 export function handleCardClick(name, link) {
   popupFullScreenPhoto.open(name, link)
