@@ -8,13 +8,11 @@ class FormValidator {
     this._formElement = formElement;
 
     this._buttonSubmit = this._formElement.querySelector(this._buttonSelector);
+    this._inputList = this._formElement.querySelectorAll(this._inputSelector);
   }
 
 
   _addFunctionLisiners() {
-    this._inputList = this._formElement.querySelectorAll(this._inputSelector);
-
-
     this._inputList.forEach((item) => {
       item.addEventListener('input', () => {
         this._handleFormInput(item)
@@ -54,11 +52,11 @@ class FormValidator {
   }
 
   resetValidation() {
-    this._toggleButton(); 
+    this._toggleButton();
 
     this._inputList.forEach((inputElement) => {
       this._errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
-      this._hideInputError(inputElement) 
+      this._hideInputError(inputElement)
     });
   }
 

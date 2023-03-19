@@ -1,6 +1,6 @@
 class Card {
   constructor(data, templateSelector, handleCardClick) {
-
+console.log(data)
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
@@ -36,8 +36,9 @@ class Card {
       this._handledeleteButton()
     });
 
+    
 
-    this._element.addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
     });
   }
@@ -58,12 +59,15 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+
+    this._cardImage = this._element.querySelector('.card__photo');
+    this._cardName = this._element.querySelector('.card__title');
+
+    this._cardImage.src = this._link;
+    this._cardName.textContent = this._name;
+    this._cardImage.alt = this._name;
+
     this._setEventListener();
-
-    this._element.querySelector('.card__photo').src = this._link;
-    this._element.querySelector('.card__title').textContent = this._name;
-    this._element.querySelector('.card__photo').alt = this._name;
-
 
     return this._element;
   }

@@ -4,9 +4,11 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import {  popupEditProfileOpen, profilePopup, popupInputName, 
-  popupInputInfo, formAddCard, cardsContainer, popupFullScreenImage, popupTypeAddPhotoOpen, 
-  popupTypeAddPhoto, inputCardTitle, inputCardUrl, profileForm, addCardPopup } from "../utils/constants.js";
+import {
+  popupEditProfileOpen, profilePopup, popupInputName,
+  popupInputInfo, formAddCard, cardsContainer, popupFullScreenImage, popupTypeAddPhotoOpen,
+  popupTypeAddPhoto, inputCardTitle, inputCardUrl, profileForm, addCardPopup
+} from "../utils/constants.js";
 import { initialCards, formValidationConfig } from '../utils/variables.js'
 import Popup from '../components/Popup.js';
 // index.js
@@ -18,17 +20,10 @@ export function handleCardClick(name, link) {
 }
 
 
-const popupEditProfile = new Popup(profilePopup);
-popupEditProfile.setEventListeners();
-
-
-const popupAddPhoto = new Popup(popupTypeAddPhoto);
-popupAddPhoto.setEventListeners();
-
 const userInfo = new UserInfo({ profileTitle: '.profile__title', profileSubtitle: '.profile__subtitle' });
 
 
-const popupFullScreenPhoto = new PopupWithImage(popupFullScreenImage)
+const popupFullScreenPhoto = new PopupWithImage('.popup_type_photo')
 popupFullScreenPhoto.setEventListeners();
 
 
@@ -39,35 +34,29 @@ const profileFormSubmit = new PopupWithForm({
       info: data.userinfo,
     });
   }
-}, profilePopup)
+}, '.popup_type_edit-profile')
 profileFormSubmit.setEventListeners();
 
 
 
-const addCardFormSubmit = new PopupWithForm({
-  handleFormSubmit: () => {
-    const data = {};
-
-    data.name = inputCardTitle.value;
-    data.link = inputCardUrl.value;
 
 
-    cardsContainer.prepend(createCard(data, '.template', handleCardClick));
-  }
-}, addCardPopup)
-addCardFormSubmit.setEventListeners();
 
-
-const initCards = new Section({
+const cardsSection = new Section({
   data: initialCards,
   renderer: (item) => {
-    const card = new Card(item, '.template', handleCardClick);
-    const cardElement = card.generateCard();
-    initCards.addItem(cardElement);
+    cardsSection.addItem(createCard(item, '.template', handleCardClick));
   }
 }, '.cards')
 
-initCards.addItems();
+cardsSection.addItems();
+
+const addCardFormSubmit = new PopupWithForm({
+  handleFormSubmit: (item) => {
+    cardsSection.prependItem((createCard(item, '.template', handleCardClick)));
+  }
+}, '.popup_type_add-photo')
+addCardFormSubmit.setEventListeners();
 
 
 const validationAddCard = new FormValidator(formValidationConfig, formAddCard);
@@ -81,18 +70,16 @@ validationProfile.enableValidation();
 
 popupEditProfileOpen.addEventListener('click', () => {
   const profileInfo = userInfo.getUserInfo();
-  popupInputName.value = profileInfo.name;
-  popupInputInfo.value = profileInfo.info;
-  popupEditProfile.open();
-
+  profileFormSubmit.open();
+  profileFormSubmit.setInputValues(profileInfo);
   validationProfile.resetValidation();
 })
 
 popupTypeAddPhotoOpen.addEventListener('click', function openTypeAddPhotoPopup() {
 
-  formAddCard.reset();
+
   validationAddCard.resetValidation();
-  popupAddPhoto.open();
+  addCardFormSubmit.open();
 })
 
 function createCard(data, templateSelector, handleOpenPopup) {
