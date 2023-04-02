@@ -52,7 +52,8 @@ const popupEditAvatar = new PopupWithForm({
     popupEditAvatar.renderLoading(true)
     api.changeAvatar(formData)
       .then((data) => {
-        userInfo.setUserInfo(data)
+        userInfo.setUserInfo(data);
+        popupEditAvatar.close();
       })
       .catch((err) => console.log(err))
       .finally(() => popupEditAvatar.renderLoading(false))
@@ -72,6 +73,7 @@ const profileFormSubmit = new PopupWithForm({
     api.setUserInfo(formData)
       .then((data) => {
         userInfo.setUserInfo(data);
+        profileFormSubmit.close();
       })
       .catch((err) => console.log(err))
       .finally(() => profileFormSubmit.renderLoading(false));
@@ -86,10 +88,7 @@ const cardsSection = new Section({
   }
 }, '.cards');
 
-api.getInitialCards()
-  .then((res) => {
-    cardsSection.render(res);
-  });
+
 
 
 
@@ -99,6 +98,7 @@ const addCardFormSubmit = new PopupWithForm({
     api.addNewCard(item)
       .then((item) => {
         cardsSection.prependItem((createCard(item, '.template', handleCardClick, userId)));
+        addCardFormSubmit.close();
       })
       .catch((err) => console.log(err))
       .finally(() => addCardFormSubmit.renderLoading(false));
@@ -141,7 +141,6 @@ popupTypeAddPhotoOpen.addEventListener('click', () => {
 function createCard(data, templateSelector, handleOpenPopup, userId) {
   const card = new Card(data, templateSelector, handleOpenPopup,
     () => {
-      popupConfirmation.setConfirm(() => {
         popupConfirmation.renderLoading(true);
         api.deleteCard(data._id)
           .then(() => {
@@ -149,8 +148,7 @@ function createCard(data, templateSelector, handleOpenPopup, userId) {
             popupConfirmation.close()
           })
           .catch((err) => console.log(err))
-          .finally(() => popupConfirmation.renderLoading(false))
-      }),
+          .finally(() => popupConfirmation.renderLoading(false)),
         popupConfirmation.open()
     },
     () => {
