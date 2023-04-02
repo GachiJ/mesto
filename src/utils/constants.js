@@ -12,3 +12,4 @@ export const profileForm = document.querySelector('#profile-form');
 export const avatarForm = document.querySelector('#form-edit-avatar');
 export const formAddCard = document.querySelector('#form-add-card');
 export const addCardPopup = document.querySelector('.popup_type_add-photo');
+export const profileAvatar = document.querySelector('.profile__avatar');
