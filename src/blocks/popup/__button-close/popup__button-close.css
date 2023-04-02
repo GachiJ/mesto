@@ -11,6 +11,9 @@
   object-fit: cover;
   background-size: 100%;
   padding: 0;
+  position: absolute;
+  right: 0;
+  top: -36px;
 }
 
 .popup__button-close:hover {
@@ -21,7 +24,7 @@
   .popup__button-close {
     width: 32px;
     height: 32px;
-    position: relative;
-    left: 40px;
+    right: -50px;
+    top: -40px;
   }
 }
