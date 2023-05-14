@@ -7,12 +7,11 @@
   line-height: 15px;
   color: red;
   position: absolute;
-  margin: 0 22px;
+  margin: 0;
 }
 
 @media screen and (min-width: 1280px) {
   .error {
     max-width: 358px;
-    margin: 0 36px;
   }
 }

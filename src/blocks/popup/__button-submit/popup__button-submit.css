@@ -12,6 +12,7 @@
   border-radius: 2px;
   padding: 0;
   display: block;
+  margin-top: 50px;
 }
 
 .popup__button-submit:hover {

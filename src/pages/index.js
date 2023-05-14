@@ -141,6 +141,8 @@ popupTypeAddPhotoOpen.addEventListener('click', () => {
 function createCard(data, templateSelector, handleOpenPopup, userId) {
   const card = new Card(data, templateSelector, handleOpenPopup,
     () => {
+      popupConfirmation.open()
+      popupConfirmation.setConfirm(() => {
         popupConfirmation.renderLoading(true);
         api.deleteCard(data._id)
           .then(() => {
@@ -149,7 +151,8 @@ function createCard(data, templateSelector, handleOpenPopup, userId) {
           })
           .catch((err) => console.log(err))
           .finally(() => popupConfirmation.renderLoading(false)),
-        popupConfirmation.open()
+          popupConfirmation.open()
+      })
     },
     () => {
       if (!card.isLiked()) {
